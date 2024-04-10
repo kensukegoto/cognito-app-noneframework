@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <main>
+    <form name="login">
+      <div>
+        <label for="name">ユーザー名:</label>
+        <input type="text" id="name" name="name" />
+      </div>
+      <div>
+        <label for="password">パスワード:</label>
+        <input type="password" id="pasword" name="password" />
+      </div>
+      <input id="submit" type="submit" value="ログイン" />
+    </form>
+  </main>
+  <script src="./bundle.js"></script>
+  <script>
+
+    const submitBtn = document.getElementById('submit');
+    
+    submitBtn.addEventListener('click', async (e) => {
+
+      e.preventDefault();
+      const form = document.forms['login'];
+
+      const userName = form.name.value;
+      const password = form.password.value;
+
+      const res = await signIn({ userName, password });
+      if(!res.success) {
+        // エラー処理
+        return;
+      }
+      window.location.href = '/index.html';
+    });
+
+
+
+
+  </script>
+</body>
+</html>

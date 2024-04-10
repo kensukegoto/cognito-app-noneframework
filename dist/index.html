@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <p id="username">ログイン処理中...</p>
+  </header>
+  <main>
+    <h1>WELCOME</h1>
+    <ul>
+      <li><a href="a.html">ページA</a></li>
+      <li><a href="b.html">ページB</a></li>
+    </ul>
+  </main>
+  <script src="./bundle.js"></script>
+  <script>
+    (async () => {
+      const res = await getUser();
+      if(!res.success) {
+        console.log('失敗');
+        window.location.href = '/login.html';
+        return;
+      }
+      const userData = res.data.UserAttributes.reduce((wip, e) => {
+        wip[e.Name] = e.Value;
+        return wip;
+      }, {});
+      const username = userData.name;
+      document.getElementById('username').innerText = `${username}ログイン中`
+
+    })();
+  </script>
+</body>
+</html>
